@@ -9,5 +9,9 @@ export enum Topics {
   frontGeneral = 1,
   frontCss = 2,
   frontJavascript = 3,
-  frontVue = 4
+  frontVue = 4,
+  generalYoutrack = 5,
+  generalGit = 6,
+  generalInfrastructure = 7,
+  generalSoftSkills = 8
 }

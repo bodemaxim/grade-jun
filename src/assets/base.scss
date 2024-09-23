@@ -1,3 +1,12 @@
+//Переменные цветы
+:root {
+  --grey-90: #1e1e1e;
+  --grey-80: #323232;
+  --grey-10: lightgrey;
+  --grey-0: white;
+  --purple: rgb(87, 0, 87);
+}
+
 // Определение миксина
 @mixin font-smoothing {
   -webkit-font-smoothing: antialiased;

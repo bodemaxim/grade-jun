@@ -85,6 +85,7 @@ main {
   height: 100vh;
   width: 100vw;
   overflow-y: hidden;
+  background-color: var(--grey-80);
 }
 
 .panels-container {
@@ -94,12 +95,13 @@ main {
 
 .search-panel,
 .view-panel {
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--grey-10);
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   margin: 1em;
-  padding: 1em;
-  max-height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px);
+  background-color: var(--grey-90);
+  overflow: hidden;
 }
 
 .search-panel {
@@ -109,6 +111,8 @@ main {
 .view-panel {
   flex-grow: 1;
   margin-right: 2em;
+  color: var(--grey-10);
+  padding: 10px;
 }
 
 .view-panel-question {

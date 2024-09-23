@@ -53,6 +53,22 @@ const viewAnswer = (question: IQuestion) => {
   emits('questionView', question)
 }
 
+const generalYoutrackQuestions = computed(() =>
+  questions.value.filter((item) => item.topic === Topics.generalYoutrack)
+)
+
+const generalGitQuestions = computed(() =>
+  questions.value.filter((item) => item.topic === Topics.generalGit)
+)
+
+const generalInfrustructureQuestions = computed(() =>
+  questions.value.filter((item) => item.topic === Topics.generalInfrastructure)
+)
+
+const generalSoftSkillsQuestions = computed(() =>
+  questions.value.filter((item) => item.topic === Topics.generalSoftSkills)
+)
+
 const frontGeneralQuestions = computed(() =>
   questions.value.filter((item) => item.topic === Topics.frontGeneral)
 )
@@ -73,64 +89,128 @@ initData()
 </script>
 
 <template>
-  <div class="panel-content mt-5">
-    <h3>Общетехнические навыки</h3>
-    <ol>
-      <li
-        v-for="item in frontGeneralQuestions"
-        :key="item.id"
-        @click="viewAnswer(item)"
-        class="question-item"
-      >
-        {{ item.question }}
-      </li>
-    </ol>
-    <h3>Верстка</h3>
-    <ol>
-      <li
-        v-for="item in frontCssQuestions"
-        :key="item.id"
-        @click="viewAnswer(item)"
-        class="question-item"
-      >
-        {{ item.question }}
-      </li>
-    </ol>
-    <h3>JavaScript</h3>
-    <ol>
-      <li
-        v-for="item in frontJsQuestions"
-        :key="item.id"
-        @click="viewAnswer(item)"
-        class="question-item"
-      >
-        {{ item.question }}
-      </li>
-    </ol>
-    <h3>VueJS</h3>
-    <ol>
-      <li
-        v-for="item in frontVueQuestions"
-        :key="item.id"
-        @click="viewAnswer(item)"
-        class="question-item"
-      >
-        {{ item.question }}
-      </li>
-    </ol>
+  <div>
+    <div class="panel-content mt-5">
+      <h2>Общие компетенции Младший специалист</h2>
+      <h3>Youtrack</h3>
+      <ol>
+        <li
+          v-for="item in generalYoutrackQuestions"
+          :key="item.id"
+          @click="viewAnswer(item)"
+          class="question-item"
+        >
+          {{ item.question }}
+        </li>
+      </ol>
+      <h3>Git</h3>
+      <ol>
+        <li
+          v-for="item in generalGitQuestions"
+          :key="item.id"
+          @click="viewAnswer(item)"
+          class="question-item"
+        >
+          {{ item.question }}
+        </li>
+      </ol>
+      <h3>Инфраструктура</h3>
+      <ol>
+        <li
+          v-for="item in generalInfrustructureQuestions"
+          :key="item.id"
+          @click="viewAnswer(item)"
+          class="question-item"
+        >
+          {{ item.question }}
+        </li>
+      </ol>
+      <h3>Soft skills</h3>
+      <ol>
+        <li
+          v-for="item in generalSoftSkillsQuestions"
+          :key="item.id"
+          @click="viewAnswer(item)"
+          class="question-item"
+        >
+          {{ item.question }}
+        </li>
+      </ol>
+
+      <h2>Навыки Frontend</h2>
+      <h3>Общетехнические навыки</h3>
+      <ol>
+        <li
+          v-for="item in frontGeneralQuestions"
+          :key="item.id"
+          @click="viewAnswer(item)"
+          class="question-item"
+        >
+          {{ item.question }}
+        </li>
+      </ol>
+      <h3>Верстка</h3>
+      <ol>
+        <li
+          v-for="item in frontCssQuestions"
+          :key="item.id"
+          @click="viewAnswer(item)"
+          class="question-item"
+        >
+          {{ item.question }}
+        </li>
+      </ol>
+      <h3>JavaScript</h3>
+      <ol>
+        <li
+          v-for="item in frontJsQuestions"
+          :key="item.id"
+          @click="viewAnswer(item)"
+          class="question-item"
+        >
+          {{ item.question }}
+        </li>
+      </ol>
+      <h3>VueJS</h3>
+      <ol>
+        <li
+          v-for="item in frontVueQuestions"
+          :key="item.id"
+          @click="viewAnswer(item)"
+          class="question-item"
+        >
+          {{ item.question }}
+        </li>
+      </ol>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 $font-family-main: 'Montserrat', sans-serif;
 $transition-time: 0.2s;
-$hover-background-color: lightskyblue;
+$hover-background-color: var(--purple);
+
+* {
+  color: var(--grey-10);
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: bold;
+}
 
 .panel-content {
   font-family: $font-family-main;
   overflow-y: auto;
-  max-height: 400px;
-  max-width: 100%;
+  height: calc(100vh - 150px);
+  width: 100%;
+  padding: 1em;
 }
 
 .question-item {
