@@ -4,12 +4,8 @@ import type { Ref } from 'vue'
 import { useStore } from 'vuex'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { marked } from 'marked'
-
 import SpinningLoader from './SpinningLoader.vue'
 import SearchPanel from './SearchPanel.vue'
-
-import { Levels, Topics } from '@/enum/Enum'
-
 import type { IQuestion } from '@/interfaces/IData'
 
 const store = useStore()
@@ -25,34 +21,6 @@ const question: Ref<IQuestion | null> = ref<IQuestion | null>(null)
  */
 const onQuestionViewChanged = (questionView: IQuestion | null) => {
   question.value = questionView
-}
-
-const getLevelText = (level: Levels): string => {
-  switch (level) {
-    case Levels.beginner:
-      return 'начинающий'
-    case Levels.intermediate:
-      return 'средний'
-    case Levels.advanced:
-      return 'продвинутый'
-    default:
-      return 'неизвестно'
-  }
-}
-
-const getTopicsText = (topic: Topics): string => {
-  switch (topic) {
-    case Topics.frontGeneral:
-      return 'Общетехнические навыки'
-    case Topics.frontCss:
-      return 'CSS'
-    case Topics.frontJavascript:
-      return 'JavaScript'
-    case Topics.frontVue:
-      return 'Vue'
-    default:
-      return 'неизвестно'
-  }
 }
 </script>
 
@@ -70,10 +38,8 @@ const getTopicsText = (topic: Topics): string => {
             <h2>{{ question.question }}</h2>
             <p v-html="marked.parse(question.answer)"></p>
             <hr />
-            <p><b>Тема: </b>{{ getTopicsText(question.topic) }}</p>
-            <p><b>Уровень: </b>{{ getLevelText(question.level) }}</p>
           </div>
-          <p v-else class="mt-7">Выберите вопрос, чтобы посмотреть ответ на него.</p>
+          <p v-else class="mt-7 ml-5">Выберите вопрос, чтобы посмотреть ответ на него.</p>
         </div>
       </div>
     </div>
@@ -85,7 +51,7 @@ main {
   height: 100vh;
   width: 100vw;
   overflow-y: hidden;
-  background-color: var(--grey-80);
+  background-color: var(--primary-dark);
 }
 
 .panels-container {
@@ -95,28 +61,28 @@ main {
 
 .search-panel,
 .view-panel {
-  border: 1px solid var(--grey-10);
+  border: 1px solid var(--primary-accent);
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   margin: 1em;
   min-height: calc(100vh - 100px);
-  background-color: var(--grey-90);
+  background-color: var(--bg-dark);
   overflow: hidden;
 }
 
 .search-panel {
-  max-width: 30%;
+  min-width: 300px;
+  max-width: 300px;
 }
 
 .view-panel {
   flex-grow: 1;
   margin-right: 2em;
-  color: var(--grey-10);
-  padding: 10px;
 }
 
 .view-panel-question {
-  height: calc(100vh - 140px);
+  height: calc(100vh - 100px);
+  padding: 30px 15px 10px;
   overflow-y: auto;
 }
 
@@ -126,41 +92,5 @@ main {
 
 hr {
   border: 2px solid gray;
-}
-
-/* XS */
-@media (min-width: 320px) and (max-width: 575px) {
-  main {
-    font-size: 14px;
-    overflow-y: auto;
-  }
-
-  .panels-container {
-    display: block;
-  }
-
-  .search-panel {
-    display: block;
-    width: 100%;
-    max-width: calc(100% - 24px);
-    height: auto;
-    max-height: 60vh;
-    margin: 1em;
-  }
-
-  .view-panel {
-    margin: 1em;
-  }
-
-  .view-panel-question {
-    height: auto;
-  }
-}
-
-/* S */
-@media (min-width: 576px) and (max-width: 767px) {
-  main {
-    font-size: 15px;
-  }
 }
 </style>

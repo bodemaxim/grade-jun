@@ -19,6 +19,39 @@ const setLoadingFalse = () => {
 
 const questions = ref<IQuestion[]>([])
 
+interface ITopicsVisible {
+  youtrack: boolean
+  git: boolean
+  infrastructure: boolean
+  softSkills: boolean
+  general: boolean
+  css: boolean
+  javascript: boolean
+  vue: boolean
+}
+
+const topicsVisibleDefault = {
+  youtrack: false,
+  git: false,
+  infrastructure: false,
+  softSkills: false,
+  general: false,
+  css: false,
+  javascript: false,
+  vue: false
+}
+
+const topicsVisible = ref(topicsVisibleDefault)
+
+const toggleTopicVisibility = <T extends keyof ITopicsVisible>(key: T) => {
+  const newValue = !topicsVisible.value[key]
+  console.log('newValue', newValue)
+  topicsVisible.value = JSON.parse(JSON.stringify(topicsVisibleDefault))
+  console.log('topicsVisible', topicsVisible.value)
+  topicsVisible.value[key] = newValue
+  console.log('topicsVisible.value[key]', topicsVisible.value[key])
+}
+
 const initData = async () => {
   setLoadingTrue()
 
@@ -90,10 +123,10 @@ initData()
 
 <template>
   <div>
-    <div class="panel-content mt-5">
-      <h2>Общие компетенции Младший специалист</h2>
-      <h3>Youtrack</h3>
-      <ol>
+    <div class="panel-content">
+      <h2 class="topic-group mb-5">Общие компетенции Младший специалист</h2>
+      <h3 @click="toggleTopicVisibility('youtrack')" class="topic-title">Youtrack</h3>
+      <ol v-if="topicsVisible.youtrack">
         <li
           v-for="item in generalYoutrackQuestions"
           :key="item.id"
@@ -103,8 +136,8 @@ initData()
           {{ item.question }}
         </li>
       </ol>
-      <h3>Git</h3>
-      <ol>
+      <h3 @click="toggleTopicVisibility('git')" class="topic-title">Git</h3>
+      <ol v-if="topicsVisible.git">
         <li
           v-for="item in generalGitQuestions"
           :key="item.id"
@@ -114,8 +147,8 @@ initData()
           {{ item.question }}
         </li>
       </ol>
-      <h3>Инфраструктура</h3>
-      <ol>
+      <h3 @click="toggleTopicVisibility('infrastructure')" class="topic-title">Инфраструктура</h3>
+      <ol v-if="topicsVisible.infrastructure">
         <li
           v-for="item in generalInfrustructureQuestions"
           :key="item.id"
@@ -125,8 +158,8 @@ initData()
           {{ item.question }}
         </li>
       </ol>
-      <h3>Soft skills</h3>
-      <ol>
+      <h3 @click="toggleTopicVisibility('softSkills')" class="topic-title">Soft skills</h3>
+      <ol v-if="topicsVisible.softSkills">
         <li
           v-for="item in generalSoftSkillsQuestions"
           :key="item.id"
@@ -137,9 +170,9 @@ initData()
         </li>
       </ol>
 
-      <h2>Навыки Frontend</h2>
-      <h3>Общетехнические навыки</h3>
-      <ol>
+      <h2 class="topic-group mt-10 mb-5">Навыки Frontend</h2>
+      <h3 @click="toggleTopicVisibility('general')" class="topic-title">Общетехнические навыки</h3>
+      <ol v-if="topicsVisible.general">
         <li
           v-for="item in frontGeneralQuestions"
           :key="item.id"
@@ -149,8 +182,8 @@ initData()
           {{ item.question }}
         </li>
       </ol>
-      <h3>Верстка</h3>
-      <ol>
+      <h3 @click="toggleTopicVisibility('css')" class="topic-title">Верстка</h3>
+      <ol v-if="topicsVisible.css">
         <li
           v-for="item in frontCssQuestions"
           :key="item.id"
@@ -160,8 +193,8 @@ initData()
           {{ item.question }}
         </li>
       </ol>
-      <h3>JavaScript</h3>
-      <ol>
+      <h3 @click="toggleTopicVisibility('javascript')" class="topic-title">JavaScript</h3>
+      <ol v-if="topicsVisible.javascript">
         <li
           v-for="item in frontJsQuestions"
           :key="item.id"
@@ -171,8 +204,8 @@ initData()
           {{ item.question }}
         </li>
       </ol>
-      <h3>VueJS</h3>
-      <ol>
+      <h3 @click="toggleTopicVisibility('vue')" class="topic-title">VueJS</h3>
+      <ol v-if="topicsVisible.vue">
         <li
           v-for="item in frontVueQuestions"
           :key="item.id"
@@ -189,7 +222,7 @@ initData()
 <style lang="scss" scoped>
 $font-family-main: 'Montserrat', sans-serif;
 $transition-time: 0.2s;
-$hover-background-color: var(--purple);
+$hover-background-color: var(--bg-darker);
 
 * {
   color: var(--grey-10);
@@ -208,9 +241,9 @@ h3 {
 .panel-content {
   font-family: $font-family-main;
   overflow-y: auto;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 100px);
   width: 100%;
-  padding: 1em;
+  padding: 30px 15px 10px;
 }
 
 .question-item {
@@ -225,6 +258,14 @@ h3 {
 
 .filter-btn {
   width: 150px;
+}
+
+.topic-group {
+  color: lightgreen;
+}
+
+.topic-title {
+  cursor: pointer;
 }
 
 /* XS */

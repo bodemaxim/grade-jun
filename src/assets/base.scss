@@ -1,10 +1,32 @@
-//Переменные цветы
+//Переменные цвета
 :root {
-  --grey-90: #1e1e1e;
-  --grey-80: #323232;
-  --grey-10: lightgrey;
-  --grey-0: white;
-  --purple: rgb(87, 0, 87);
+  --primary-dark: #212121; /* Main dark background color */
+  --primary-accent: #66d9ef; /* Accent color for buttons, links, etc. */
+  --primary-text: #ffffff; /* Main text color */
+}
+
+:root {
+  --bg-dark: #1a1a1a; /* Dark background for sections, cards, etc. */
+  --bg-darker: #0b0721; /* Even darker background for overlays, etc. */
+  --bg-lighter: #333333; /* Lighter background for highlights, etc. */
+}
+
+:root {
+  --text-primary: #c7c5b8; /* Primary text color */
+  --text-muted: #666666; /* Muted text color */
+  --text-highlight: #ffffff; /* Highlighted text color */
+}
+
+:root {
+  --accent-green: #34c759; /* Green accent color */
+  --accent-blue: #8880ff; /* Blue accent color */
+  --accent-yellow: #f7dc6f; /* Yellow accent color */
+  --accent-red: #ff2222; /* Red accent color */
+}
+
+:root {
+  --grad-dark-to-light: linear-gradient(to bottom, var(--primary-dark), var(--bg-lighter));
+  --grad-accent-to-dark: linear-gradient(to bottom, var(--primary-accent), var(--primary-dark));
 }
 
 // Определение миксина
@@ -52,6 +74,73 @@ body {
   @include font-smoothing;
 }
 
+img {
+  max-width: calc(100% - 30px);
+  margin: 15px auto;
+  display: block;
+  border: 3px solid var(--bg-lighter);
+  border-radius: 5px;
+  box-shadow: 0 0 15px var(--accent-blue);
+}
+
+* {
+  color: var(--primary-text);
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 22px;
+  color: rgb(116, 138, 236);
+}
+
+h3 {
+  font-size: 20px;
+  color: lightblue;
+}
+
+h4 {
+  font-size: 18px;
+  color: lightblue;
+}
+
+p {
+  font-size: 16px;
+}
+
+pre {
+  background-color: var(--bg-darker);
+  border-radius: 10px;
+  padding: 10px;
+}
+
 .custom-title {
+  font-size: 30px;
+  font-weight: bold;
   font-family: 'Montserrat Extrabold', sans-serif;
+  color: var(--accent-red);
+  padding: 20px 0 5px;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 10px; /* Set the scrollbar width */
+  height: 10px; /* Set the scrollbar height */
+  background-color: #333; /* Dark background color */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #666; /* Dark thumb color */
+  border-radius: 10px; /* Rounded corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #888; /* Darker thumb color on hover */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #444; /* Dark track color */
+  border-radius: 10px; /* Rounded corners */
 }
