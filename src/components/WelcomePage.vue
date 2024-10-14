@@ -7,7 +7,7 @@ const emits = defineEmits<{
 
 const inputValue = ref('')
 
-const correctPassword = ''
+const correctPassword = 'Tages2024'
 
 const checkPassword = () => {
   if (inputValue.value === correctPassword) {
