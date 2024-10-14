@@ -19,7 +19,7 @@
 
 :root {
   --accent-green: #34c759; /* Green accent color */
-  --accent-blue: #8880ff; /* Blue accent color */
+  --accent-blue: #3f388f; /* Blue accent color */
   --accent-yellow: #f7dc6f; /* Yellow accent color */
   --accent-red: #ff2222; /* Red accent color */
 }
@@ -29,13 +29,11 @@
   --grad-accent-to-dark: linear-gradient(to bottom, var(--primary-accent), var(--primary-dark));
 }
 
-// Определение миксина
 @mixin font-smoothing {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-// Остальной SCSS код
 * {
   box-sizing: border-box;
 }
@@ -89,31 +87,50 @@ img {
 
 h1 {
   font-size: 24px;
+  margin: 15px 0;
 }
 
 h2 {
   font-size: 22px;
   color: rgb(116, 138, 236);
+  margin: 15px 0;
 }
 
 h3 {
   font-size: 20px;
-  color: lightblue;
+  color: lightpink;
+  margin: 15px 0 5px 10px;
 }
 
 h4 {
   font-size: 18px;
   color: lightblue;
+  margin: 10px 0 5px 20px;
 }
 
 p {
   font-size: 16px;
+  margin: 10px 0 10px 40px;
+}
+
+ul,
+ol {
+  margin: 12px 50px;
+}
+
+li {
+  font-size: 14px;
+  margin: 0 0 5px 0;
 }
 
 pre {
-  background-color: var(--bg-darker);
-  border-radius: 10px;
-  padding: 10px;
+  display: inline-block; /* Задает элементу ширину по содержимому */
+  background-color: var(--accent-blue);
+  border-radius: 8px;
+  padding: 15px 80px 15px 15px;
+  margin: 10px 40px;
+  max-width: calc(100% - 100px);
+  overflow-y: auto;
 }
 
 .custom-title {
@@ -142,5 +159,5 @@ pre {
 
 ::-webkit-scrollbar-track {
   background-color: #444; /* Dark track color */
-  border-radius: 10px; /* Rounded corners */
+  border-radius: 5px; /* Rounded corners */
 }

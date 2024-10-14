@@ -4,6 +4,7 @@ import { store } from '@/store/store'
 import initDb from '@/db/InitDb'
 import type { IQuestion } from '@/interfaces/IData'
 import { Topics } from '@/enum/Enum'
+import BottomShade from '@/components/BottomShade.vue'
 
 const emits = defineEmits<{
   questionView: [value: IQuestion | null]
@@ -122,7 +123,7 @@ initData()
 </script>
 
 <template>
-  <div>
+  <div class="panel">
     <div class="panel-content">
       <h2 class="topic-group mb-5">Общие компетенции Младший специалист</h2>
       <h3 @click="toggleTopicVisibility('youtrack')" class="topic-title">Youtrack</h3>
@@ -216,6 +217,7 @@ initData()
         </li>
       </ol>
     </div>
+    <BottomShade />
   </div>
 </template>
 
@@ -223,6 +225,10 @@ initData()
 $font-family-main: 'Montserrat', sans-serif;
 $transition-time: 0.2s;
 $hover-background-color: var(--bg-darker);
+
+.panel {
+  position: relative;
+}
 
 * {
   color: var(--grey-10);
@@ -241,18 +247,31 @@ h3 {
 .panel-content {
   font-family: $font-family-main;
   overflow-y: auto;
-  height: calc(100vh - 100px);
   width: 100%;
   padding: 30px 15px 10px;
+  height: calc(100vh - 80px);
+}
+
+ol {
+  margin: 10px;
+  list-style: decimal;
+}
+
+li {
+  display: list-item !important;
 }
 
 .question-item {
-  margin: 0;
-  padding: 0;
+  padding: 10px;
+  font-size: 14px;
+  margin: 0 0 5px 0;
+  list-style-type: decimal;
+  list-style-position: inside;
+  display: block;
+  transition: background-color 0.3s;
   &:hover {
-    background-color: $hover-background-color;
+    background-color: #3f388f;
     cursor: pointer;
-    transition: $transition-time;
   }
 }
 
