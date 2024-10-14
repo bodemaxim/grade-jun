@@ -10,7 +10,7 @@
   bottom: 0;
   width: 100%;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, var(--bg-dark) 100%);
-  height: 10px;
+  height: 8px;
   margin: 0;
 }
 </style>
