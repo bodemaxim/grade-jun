@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const emits = defineEmits<{
   passwordCorrect: []
@@ -13,6 +13,7 @@ const checkPassword = () => {
   if (inputValue.value === correctPassword) {
     console.log('password-correct')
     emits('passwordCorrect')
+    localStorage.setItem('tages2024', 'true')
   } else {
     alert('Пароль неверный. Попробуй еще раз!')
   }
@@ -23,6 +24,14 @@ const handleKeyDown = (event: KeyboardEvent) => {
     checkPassword()
   }
 }
+
+onMounted(() => {
+  const isLoggedIn = localStorage.getItem('tages2024')
+  if (isLoggedIn) {
+    console.log('Пользователь уже авторизован')
+    emits('passwordCorrect')
+  }
+})
 </script>
 
 <template>
