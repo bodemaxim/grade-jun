@@ -28,7 +28,6 @@ const handleKeyDown = (event: KeyboardEvent) => {
 onMounted(() => {
   const isLoggedIn = localStorage.getItem('tages2024')
   if (isLoggedIn) {
-    console.log('Пользователь уже авторизован')
     emits('passwordCorrect')
   }
 })
@@ -41,7 +40,7 @@ onMounted(() => {
       <h1 class="mb-7">Аттестация Junior Frontend Developer</h1>
       <input
         class="input-form"
-        type="password"
+        type="text"
         v-model="inputValue"
         placeholder="введите пароль"
         @keydown="handleKeyDown"
