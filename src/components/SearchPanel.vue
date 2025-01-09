@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 import { store } from '@/store/store'
 import initDb from '@/db/InitDb'
 import type { IQuestion } from '@/interfaces/IData'
-import { Topics } from '@/enum/Enum'
+import { Topics, Levels } from '@/enum/Enum'
 import BottomShade from '@/components/BottomShade.vue'
 
 const emits = defineEmits<{
@@ -87,36 +87,57 @@ const viewAnswer = (question: IQuestion) => {
   emits('questionView', question)
 }
 
+const defaultLevel = Levels.intermediate
+const selectedLevel = ref<Levels>(defaultLevel)
+const levelNames: Record<string, string> = {
+  beginner: 'Младший специалист',
+  intermediate: 'Специалист',
+  advanced: 'Старший специалист'
+}
+
+const selectLevel = (level: Levels) => {
+  selectedLevel.value = level
+}
+
+const selectedLevelName = computed<string>(() => {
+  if (selectedLevel.value === Levels.beginner) return levelNames.beginner
+  else return levelNames.intermediate
+})
+
+const questionsSortedByLevel = computed(() =>
+  questions.value.filter((item) => item.level === selectedLevel.value)
+)
+
 const generalYoutrackQuestions = computed(() =>
-  questions.value.filter((item) => item.topic === Topics.generalYoutrack)
+  questionsSortedByLevel.value.filter((item) => item.topic === Topics.generalYoutrack)
 )
 
 const generalGitQuestions = computed(() =>
-  questions.value.filter((item) => item.topic === Topics.generalGit)
+  questionsSortedByLevel.value.filter((item) => item.topic === Topics.generalGit)
 )
 
 const generalInfrustructureQuestions = computed(() =>
-  questions.value.filter((item) => item.topic === Topics.generalInfrastructure)
+  questionsSortedByLevel.value.filter((item) => item.topic === Topics.generalInfrastructure)
 )
 
 const generalSoftSkillsQuestions = computed(() =>
-  questions.value.filter((item) => item.topic === Topics.generalSoftSkills)
+  questionsSortedByLevel.value.filter((item) => item.topic === Topics.generalSoftSkills)
 )
 
 const frontGeneralQuestions = computed(() =>
-  questions.value.filter((item) => item.topic === Topics.frontGeneral)
+  questionsSortedByLevel.value.filter((item) => item.topic === Topics.frontGeneral)
 )
 
 const frontCssQuestions = computed(() =>
-  questions.value.filter((item) => item.topic === Topics.frontCss)
+  questionsSortedByLevel.value.filter((item) => item.topic === Topics.frontCss)
 )
 
 const frontJsQuestions = computed(() =>
-  questions.value.filter((item) => item.topic === Topics.frontJavascript)
+  questionsSortedByLevel.value.filter((item) => item.topic === Topics.frontJavascript)
 )
 
 const frontVueQuestions = computed(() =>
-  questions.value.filter((item) => item.topic === Topics.frontVue)
+  questionsSortedByLevel.value.filter((item) => item.topic === Topics.frontVue)
 )
 
 initData()
@@ -125,6 +146,24 @@ initData()
 <template>
   <div class="panel">
     <div class="panel-content">
+      <div class="dropdown">
+        <button
+          class="btn btn-primary dropdown-toggle filter-btn-1"
+          type="button"
+          data-bs-toggle="dropdown"
+        >
+          <p class="d-inline ml-2">{{ selectedLevelName }}</p>
+        </button>
+        <ul class="dropdown-menu">
+          <li @click="selectLevel(Levels.beginner)" class="dropdown-item">
+            {{ levelNames.beginner }}
+          </li>
+          <li @click="selectLevel(Levels.intermediate)" class="dropdown-item">
+            {{ levelNames.intermediate }}
+          </li>
+        </ul>
+      </div>
+
       <h2 class="topic-group mb-5">Общие компетенции Младший специалист</h2>
       <h3 @click="toggleTopicVisibility('youtrack')" class="topic-title">Youtrack</h3>
       <ol v-if="topicsVisible.youtrack">
@@ -183,7 +222,13 @@ initData()
           {{ item.question }}
         </li>
       </ol>
-      <h3 @click="toggleTopicVisibility('css')" class="topic-title">Верстка</h3>
+      <h3
+        v-if="selectedLevel === Levels.beginner"
+        @click="toggleTopicVisibility('css')"
+        class="topic-title"
+      >
+        Верстка
+      </h3>
       <ol v-if="topicsVisible.css">
         <li
           v-for="item in frontCssQuestions"
@@ -284,6 +329,20 @@ li {
 }
 
 .topic-title {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  background-color: #ffffff;
+}
+
+.dropdown-item {
+  color: #000000;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #000000;
   cursor: pointer;
 }
 
