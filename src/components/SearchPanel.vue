@@ -6,8 +6,6 @@ import type { IQuestion } from '@/interfaces/IData'
 import { Topics, Levels } from '@/enum/Enum'
 import BottomShade from '@/components/BottomShade.vue'
 
-//тестовое изменение
-
 const emits = defineEmits<{
   questionView: [value: IQuestion | null]
 }>()
